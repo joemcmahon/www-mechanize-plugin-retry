@@ -7,14 +7,14 @@ __PACKAGE__->mk_accessors(qw(retry_failed _retry_check_sub
                              _method_to_retry
                              _delays _delay_index));
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 sub init {
   my($class, $pluggable) = @_;
   no strict 'refs';
   local $_;
   eval "*WWW::Mechanize::Pluggable::$_ = \\&$_"
-    for qw(retry retry_if _method_to_retry 
+    for qw(retry retry_if _method_to_retry _retry_fib
            _retry_check_sub _delays _delays_max _delay_index retry_failed);  
 
   $pluggable->pre_hook('get', sub { prehook(@_) } );
@@ -24,11 +24,11 @@ sub init {
 }
 
 sub retry_if {
-  my($self, $sub, @times) = @_;
+  my($self, $sub, $times) = @_;
 
   if (defined $sub) {  
     $self->_retry_check_sub($sub);
-    $self->_delays(\@times);
+    $self->_delays($times);
     $self->_delay_index(0);
     $self->retry_failed(0);
   }
@@ -38,8 +38,8 @@ sub retry_if {
 }
 
 sub retry {
-  my($self, @times) = @_;
-  $self->retry_if(sub {$self->success}, @times);
+  my($self, $times) = @_;
+  $self->retry_if(sub {$self->success}, $times);
 }
 
 sub prehook {
@@ -65,19 +65,42 @@ sub posthook {
 
   # Retry needed (check failed). Are we out of delays?
   my $delay_index = $pluggable->_delay_index;
-  if ($delay_index == scalar @{$pluggable->_delays}) {
+  if ($delay_index == $pluggable->_delays) {
     # Ran out this time.
     $pluggable->_delay_index(-1);
     $pluggable->retry_failed(1);
   }
   else {
-    my $current_delay = $pluggable->_delays->[$delay_index+0];
+    my $current_delay = _retry_fib($delay_index);
     $pluggable->_delay_index($pluggable->_delay_index+1);
     sleep $current_delay;
     my $method = $pluggable->_method_to_retry();
     eval "\$pluggable->$method->(\@args)";
   }
 }
+
+# initial values in Fibonacci sequence
+my @fib_for = (1,1);
+
+# Extend and cache as needed
+sub _retry_fib_for {
+  my($n) = @_;
+  # walk up cache from last known value, applying F(n) = F(n-1)+F(n-2)
+  for my $i (@fib_for..$n) {
+    $fib_for[$i] = $fib_for[$i-1]+$fib_for[$i-2];
+  }
+  return;
+}
+
+# Fibonacci # N
+sub _retry_fib {
+  my($n) = @_;
+  if (!defined $fib_for[$n]) {
+    _retry_fib_for($n);
+  }
+  return $fib_for[$n];
+}
+
 
 1; # End of WWW::Mechanize::Plugin::Retry
 __END__

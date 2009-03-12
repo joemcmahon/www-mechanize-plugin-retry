@@ -14,13 +14,13 @@ sub counter_maker {
   sub { !$count-- };
 }
 
-$foo->retry_if( counter_maker(2), 1,1,1);
+$foo->retry_if( counter_maker(2), 3);
 
 $foo->get("http://www.yahoo.com");
 ok $foo->success, "worked";
 ok !$foo->retry_failed, "no retry failure";
 
-$foo->retry_if( counter_maker(5), 1,1,1);
+$foo->retry_if( counter_maker(5), 3);
 
 $foo->get("http://www.yahoo.com");
 ok $foo->success, "worked";
