@@ -4,14 +4,14 @@ use WWW::Mechanize::Pluggable;
 
 my $foo = new WWW::Mechanize::Pluggable;
 
-$foo->retry_if(sub{ 0 }, 0); #immediate success
+$foo->retry_if(sub{ 1 }, 0); #immediate success
 $foo->get("http://www.yahoo.com");
 ok $foo->success, "worked";
 ok !$foo->retry_failed, "no retry failure";
 
 sub counter_maker {
   my $count = shift;
-  sub { $count-- };
+  sub { !$count-- };
 }
 
 $foo->retry_if( counter_maker(2), 1,1,1);

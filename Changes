@@ -1,5 +1,8 @@
 Revision history for WWW-Mechanize-Plugin-Retry
 
-0.01    Date/time
+0.02	Wed Nov 23 10:24:57 PST 2005
+	Rearranged code to get closer to the PBP standards.
+
+0.01    Wed Nov 23 10:09:14 PST 2005
         First version, released on an unsuspecting world.
 

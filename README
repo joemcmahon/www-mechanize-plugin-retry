@@ -2,9 +2,9 @@ WWW-Mechanize-Plugin-Retry
 
 This plugin adds retry handling to WWW::Mechanize::Pluggable.
 
-You can set a retry count and a retry interval, and any get()
-that fails will be retried either until it succeeds, or the number
-or retries is exceeded.
+You can set a retry count and a retry interval, and any get() or
+submit_form() that fails will be retried either until it succeeds, 
+or the number or retries is exceeded.
 
 INSTALLATION
 

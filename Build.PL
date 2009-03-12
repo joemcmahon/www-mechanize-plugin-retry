@@ -10,8 +10,9 @@ my $builder = Module::Build->new(
     requires => {
         'Test::More' => 0,
         'Test::Exception' => 0,
-        'WWW::Mechanize::Pluggable' => 0,
+        'WWW::Mechanize::Pluggable' => 0.10,
         'Class::Accessor::Fast' => 0,
+       
     },
     add_to_cleanup      => [ 'WWW-Mechanize-Plugin-Retry-*' ],
 );

@@ -1,6 +1,6 @@
 ---
 name: WWW-Mechanize-Plugin-Retry
-version: 0.01
+version: 0.02
 author:
   - Joe McMahon <mcmahon@yahoo-inc.com>
 abstract: programatically-controlled fetch retry
@@ -9,9 +9,9 @@ requires:
   Class::Accessor::Fast: 0
   Test::Exception: 0
   Test::More: 0
-  WWW::Mechanize::Pluggable: 0
+  WWW::Mechanize::Pluggable: 0.1
 provides:
   WWW::Mechanize::Plugin::Retry:
     file: lib/WWW/Mechanize/Plugin/Retry.pm
-    version: 0.01
+    version: 0.02
 generated_by: Module::Build version 0.261

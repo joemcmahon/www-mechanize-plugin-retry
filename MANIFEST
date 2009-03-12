@@ -7,5 +7,6 @@ README
 t/00-load.t
 t/01-methods.t
 t/02-use.t
+t/03-retry.t
 t/pod-coverage.t
 t/pod.t
