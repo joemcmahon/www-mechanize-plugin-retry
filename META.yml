@@ -1,17 +1,14 @@
----
-name: WWW-Mechanize-Plugin-Retry
-version: 0.03
-author:
-  - Joe McMahon <mcmahon@yahoo-inc.com>
-abstract: programatically-controlled fetch retry
-license: perl
+# http://module-build.sourceforge.net/META-spec.html
+#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
+name:         WWW-Mechanize-Plugin-Retry
+version:      0.04
+version_from: lib/WWW/Mechanize/Plugin/Retry.pm
+installdirs:  site
 requires:
-  Class::Accessor::Fast: 0
-  Test::Exception: 0
-  Test::More: 0
-  WWW::Mechanize::Pluggable: 0.1
-provides:
-  WWW::Mechanize::Plugin::Retry:
-    file: lib/WWW/Mechanize/Plugin/Retry.pm
-    version: 0.03
-generated_by: Module::Build version 0.261
+    Class::Accessor::Fast:         0
+    Test::Exception:               0
+    Test::More:                    0
+    WWW::Mechanize::Pluggable:     0.1
+
+distribution_type: module
+generated_by: ExtUtils::MakeMaker version 6.30

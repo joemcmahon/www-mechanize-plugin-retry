@@ -7,7 +7,7 @@ __PACKAGE__->mk_accessors(qw(retry_failed _retry_check_sub
                              _method_to_retry
                              _delays _delay_index));
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 sub init {
   my($class, $pluggable) = @_;

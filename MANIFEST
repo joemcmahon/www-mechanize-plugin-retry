@@ -1,4 +1,4 @@
-Build.PL
+Makefile.PL
 Changes
 lib/WWW/Mechanize/Plugin/Retry.pm
 MANIFEST

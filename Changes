@@ -1,5 +1,8 @@
 Revision history for WWW-Mechanize-Plugin-Retry
 
+0.04    Wed May 10 13:44:17 PDT 2006
+	Switched back to MakeMaker.
+
 0.03    Mon Dec  5 14:18:05 PST 2005
 	Altered retry mechanism to use Fibonacci numbers
 	for retry intervals. Simplified interface to 
